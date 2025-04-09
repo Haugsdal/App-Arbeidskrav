@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepsoitory userRepsoitory;
 
+    // ------ GET -------
     @Override
     public User getUserById(Long id) {
         return userRepsoitory.findById(id).orElse(null);
@@ -27,4 +28,12 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepsoitory.findAll();
     }
+
+    //------- POST -------
+    @Override
+    public void createUser(User user) {
+        userRepsoitory.save(user);
+    }
+
+
 }

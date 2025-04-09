@@ -23,12 +23,13 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public User getUserById(Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/email/{email}")
-    public User getUserByEmail(String email) {
+    public User getUserByEmail(@PathVariable String email) {
+        System.out.println("Email: " + email);
         return userService.getUserByEmail(email);
     }
 
@@ -37,4 +38,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    //----- POST ----
+    @PostMapping
+    public void createUser(@RequestBody User user) {
+        userService.createUser(user);
+    }
 }
