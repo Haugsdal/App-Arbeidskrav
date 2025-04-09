@@ -3,6 +3,10 @@ package org.example.mailserver.repository;
 import org.example.mailserver.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepsoitory extends JpaRepository<User, Long> {
+import java.util.List;
 
+public interface UserRepsoitory extends JpaRepository<User, Long> {
+    
+    User findUserByEmail(String email);
+    
 }

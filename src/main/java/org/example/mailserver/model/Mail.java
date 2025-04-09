@@ -1,5 +1,6 @@
 package org.example.mailserver.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class Mail {
     private String content;
 
     @Column(name = "timestamp")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timestamp;
 
 
@@ -39,7 +41,7 @@ public class Mail {
     }
 
     public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
     }
 
     public long getId() {
