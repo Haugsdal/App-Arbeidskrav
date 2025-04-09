@@ -1,5 +1,6 @@
 package org.example.mailserver.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.example.mailserver.model.Mail;
 import org.example.mailserver.model.MyDTO;
 import org.example.mailserver.repository.MailRepository;
@@ -45,31 +46,37 @@ public class MailController {
     }
 */
     @GetMapping("/{id}")
+    @Operation(summary ="Get specific mail by ID", description = "Get specific mail by ID")
     public Mail getMailById(@PathVariable long id) {
         return mailService.getMailById(id);
     }
 
     @GetMapping
+    @Operation(summary ="Get all mail", description = "Get all mail")
     public List<Mail> getMails() {
         return mailService.getAllMails();
     }
 
     @GetMapping("/from/{from}")
+    @Operation(summary ="", description = "")
     public List<Mail> getAllFromMail(@PathVariable String from) {
         return mailService.getAllFromEmail(from);
     }
 
     @GetMapping("/to/{to}")
+    @Operation(summary ="", description = "")
     public List<Mail> getAllToMail(@PathVariable String to) {
         return mailService.getAllToEmail(to);
     }
 
     @PostMapping
+    @Operation(summary ="", description = "")
     public void addMail(@RequestBody Mail mail) {
         mailService.saveMail(mail);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary ="", description = "")
     public void deleteMail(@PathVariable long id) {
         mailService.deleteMail(id);
     }
@@ -77,17 +84,20 @@ public class MailController {
 
     //Testing med data transfer object
     @GetMapping("/dto")
+    @Operation(summary ="", description = "")
     public List<MyDTO> getAllDTOs() {
         return mailService.getAllDTOs();
     }
 
 
     @GetMapping("/domain/{domain}")
+    @Operation(summary ="", description = "")
     public List<Mail> getAllFromDomain(@PathVariable String domain) {
         return mailService.getMailsByDomain(domain);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary ="Update mail", description = "Update mail")
     public ResponseEntity<Mail> updateMail(@PathVariable long id, @RequestBody Mail updatedMail) {
         try {
             Mail mail = mailService.updateMail(id, updatedMail);
