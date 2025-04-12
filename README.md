@@ -67,7 +67,7 @@ Access the Swagger UI to explore and test the API:
 2. Go to `http://localhost:8080/swagger-ui.html` in your browser
 3. Explore and test the available endpoints:
     - Expand the "Mail Controller" section to see all endpoints
-    - Click on an endpoint (e.g., GET `/api/v1/app_user`)
+    - Click on an endpoint (e.g., GET `/api/v1/users`)
     - Click "Try it out", then "Execute"
     - View the response
 
@@ -81,11 +81,20 @@ Access the Swagger UI to explore and test the API:
    - PUT `/api/mail/{id}` - Update mail
    - DELETE `/api/mail/{id}` - Delete mail by ID
 
+   - PUT `/api/user/{id}` - Update user by ID
+   - POST `/api/user` - Create new user
+   - GET `/api/user/get/` - Get all users
+   - GET `/api/user/get-id/{id}` - Get user by ID
+   - GET `/api/user/get-email/{email}` - Get user by email
+   - DELETE `/api/user/delete-id/{id}` - Delete mail by ID
+   - DELETE `/api/user/delete-email/{email}` - Delete mail by email
 
-Example POST request body (app_user):
+
+Example POST request body (users):
 
 ```json
 {
+  "id": "4",
   "username": "bertusmaximus",
   "email": "drbert@conke.ru",
   "password": "hemmelig"
@@ -117,8 +126,14 @@ The `Mail` entity represents a mail in the database with fields:
 - content
 - timestamp
 
+The `User` entity represents a mail in the database with fields:
+- id (primary key)
+- username
+- email
+- password
+
 ### Repository
-The `MailRepository` provides data access methods:
+The `MailRepository` and `UserRepository` provides data access methods:
 - Basic CRUD operations (from JpaRepository)
 - Custom finder methods
 
@@ -130,6 +145,15 @@ The `MailService` implements business logic:
 - Update existing mail
 - Delete mail
 
+The `UserService` implements business logic:
+- Get all users
+- Get user by ID
+- Get user by email
+- Create new user
+- Update existing user
+- Delete user by ID
+- Delete user by email
+
 ### Controller
 The `MailController` defines REST endpoints:
 - GET `/api/mail/{id}` - Get mail by ID
@@ -137,3 +161,12 @@ The `MailController` defines REST endpoints:
 - POST `/api/mail` - Create new mail
 - PUT `/api/mail/{id}` - Update mail
 - DELETE `/api/mail/{id}` - Delete mail by ID
+
+The `UserController` defines REST endpoints:
+- PUT `/api/user/{id}` - Update user by ID
+- POST `/api/user` - Create new user
+- GET `/api/user/get/` - Get all users
+- GET `/api/user/get-id/{id}` - Get user by ID
+- GET `/api/user/get-email/{email}` - Get user by email
+- DELETE `/api/user/delete-id/{id}` - Delete mail by ID
+- DELETE `/api/user/delete-email/{email}` - Delete mail by email

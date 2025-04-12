@@ -77,7 +77,7 @@ public class MailController {
 
     @DeleteMapping("/{id}")
     @Operation(summary ="", description = "")
-    public void deleteMail(@PathVariable long id) {
+    public void deleteMail(@PathVariable Long id) {
         mailService.deleteMail(id);
     }
 
