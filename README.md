@@ -1,3 +1,10 @@
+## Contributors
+- [Oscar](https://github.com/OscarGamst)
+- [Malin](https://github.com/Haugsdal)
+- [Sara](https://github.com/saraechk)
+- [Albert](https://github.com/AlbiDota)
+##
+
 ## Tech Stack
 
 - Java 21
