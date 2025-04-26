@@ -6,7 +6,7 @@ import lombok.*;
 
 
 @Entity
-@Table(name= "users")
+@Table(name= "user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,16 +15,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long userid;
 
-    @Column(name = "username")
-    private String username;
+    @Column (nullable=false, name= "first_name")
+    private String firstname;
 
-    @Column(name = "email")
+    @Column(nullable=false, name="last_name")
+    private String lastname;
+
+    @Column(nullable=false, name="email_address")
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable=false, name="password")
     private String password;
 
+    @Column(nullable=false, name="date_of_birth")
+    private String dateOfBirth;
 
 }

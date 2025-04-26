@@ -8,19 +8,23 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+
+/*
+    User repository is used for interacting with the database without having to write SQL.
+
+    CRUD - Create, Read, Update and Delete
+    
+    need find, save, and delete
+ */
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> findAll();
-
-    //User findById(Long id);
-
+    //Find user by email
     User findByEmail(String email);
 
+    //Save new user
+    User save(User user);
 
-    void deleteUserById(Long id);
-
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM User u WHERE u.email = ?1")
-    void deleteUserByEmail(String email);
+    //Delete user by email
+    void deleteByEmail(String email);
 }

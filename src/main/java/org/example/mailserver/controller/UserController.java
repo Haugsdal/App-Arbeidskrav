@@ -14,6 +14,10 @@ import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
+/*
+Controller maps the http request to the corresponding route
+ */
+
 @Tag(name = "User Controller")
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -22,11 +26,50 @@ public class UserController {
 
     private final UserService userService;
 
+    //Automatically make the program create an instance of the respository for the user entity
     @Autowired
     UserRepository userRepository;
+
+    //Get user by email:3
+    @GetMapping("get-email/{email}")
+    @Operation(summary="Get user by email", description="Get user by email address")
+    public User getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
+    }
+
+    //Create/Post user
+    @GetMapping("create-email/{email}")
+    @Operation(summary="Create user", description="Create user by sending user information")
+
+    /*
+    Delete user by email:O - her må vi slette alle aktiviteter før man kan slette brukeren!
+
+    @GetMapping("del-email/{email}")
+    @Operation(summary="Delete user with email", description="Deletes user with corresponding email")
+    public User deleteUser(@PathVariable String email) {}
+
+    */
+
+    //Create activity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
     // ------ GET -------
     @GetMapping("/get-id/{id}")
@@ -37,9 +80,7 @@ public class UserController {
 
     @GetMapping("/get-email/{email}")
     @Operation(summary="Get user by email", description = "Get user by email")
-    public User getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
-    }
+
 
     @GetMapping("/get/")
     @Operation(summary="Get all users", description = "List all users")
@@ -78,4 +119,7 @@ public class UserController {
     @DeleteMapping("/delete-email/{email:.+}") //for spesialtegn
     @Operation(summary="Delete user by email", description = "Delete a user using email")
     public void deleteUserByEmail(@PathVariable String email) { userService.deleteUserByEmail(email);}
+
+
+     */
 }
