@@ -6,7 +6,7 @@ import lombok.*;
 
 
 @Entity
-@Table(name= "user")
+@Table(name= "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (nullable=false, name="user_id")
     private Long userId;
 
     @Column (nullable=false, name= "first_name")

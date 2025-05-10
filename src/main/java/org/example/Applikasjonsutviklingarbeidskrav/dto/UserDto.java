@@ -11,7 +11,7 @@ public class UserDto {
     date of birth of the user and their password.
      */
 
-    private Long id;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String email;

@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
-@Data //Combines the getter and setter annotation
-
+@Data //Combines the getter, setter  and other annotations
 public class RegisterUserDto {
-    private Long id;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String email;

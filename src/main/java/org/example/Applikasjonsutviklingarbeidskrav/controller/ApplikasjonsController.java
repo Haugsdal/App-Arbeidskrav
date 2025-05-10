@@ -1,20 +1,27 @@
 package org.example.Applikasjonsutviklingarbeidskrav.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.RegisterUserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.UserDto;
-import org.example.Applikasjonsutviklingarbeidskrav.model.User;
 import org.example.Applikasjonsutviklingarbeidskrav.repository.UserRepository;
+//import org.example.Applikasjonsutviklingarbeidskrav.service.ApplikasjonsService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController //Creates a bean that is managed by spring
-@AllArgsConstructor
 @RequestMapping("/app")
+@Tag(name="ApplikasjonsController", description="API for managing users and activitites")
+@RequiredArgsConstructor
 public class ApplikasjonsController {
 
     private final UserRepository userRepository;
+    //private final ApplikasjonsService applikasjonsService;
 
     //Get user by email
     @GetMapping("getEmail/{email}")
@@ -31,36 +38,31 @@ public class ApplikasjonsController {
             return ResponseEntity.notFound().build();
         }
 
-        //To protect the information, we use a dto to limit the information displayed for the user.
+        //To protect the information, we use a dto to limit the information displayed for the user
         var userDto = new UserDto(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail());
 
         //Lastly, we return the information in the user dto.
         return ResponseEntity.ok(userDto);
     }
 
+
+
     /*
+    Create user
+    Collect information from JSON body and insert it into a dto. Then, call service layer and pass
+    the dto to it. Respond with request has been completed.
 
-    //Create user:3
     @PostMapping("createUser")
-    @Operation(summary="Create user", description="Post user")
-    public UserDto createUser(@RequestBody RegisterUserDto newUser) {
-        //Check if user exists in database
-        var found=userRepository.findByEmail(user.getEmail).orElse(null);
-
-        //Checking if the email is already in use
-        if (found!=null) {
-            //If the email exists, the page will respond with code 400 for bad request.
-            return ResponseEntity.badRequest().build();
-        }
-
-        //If the email isn't in use, create user using dto
-
-        //If it doesn't exist, create user using dto (the dto has rules for what is allowed^^)
-
-
-
-        return ResponseEntity.ok(userRepository.save(userDto));
+    @Operation(summary="Post user", description="Create user")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponses(
+            @ApiResponse(responseCode="500", description="Internal Server Error")
+    )
+    public ResponseEntity<RegisterUserDto> createUser (@Valid @RequestBody RegisterUserDto registerUserDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(applikasjonsService.createUser(registerUserDto));
     }
-    */
+
+
+     */
 
 }
