@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class AppArbeidskravRiktigApplication {
+public class RiktigAppApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AppArbeidskravRiktigApplication.class, args);
+        SpringApplication.run(RiktigAppApplication.class, args);
     }
     
 }
