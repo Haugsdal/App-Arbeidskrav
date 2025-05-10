@@ -1,4 +1,4 @@
-package org.example.mailserver;
+package org.example.Applikasjonsutviklingarbeidskrav;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

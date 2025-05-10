@@ -1,4 +1,4 @@
-package org.example.mailserver.model;
+package org.example.Applikasjonsutviklingarbeidskrav.model;
 
 import jakarta.persistence.*;
 import lombok.*;

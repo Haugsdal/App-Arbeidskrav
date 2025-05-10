@@ -1,4 +1,4 @@
-package org.example.mailserver;
+package org.example.Applikasjonsutviklingarbeidskrav;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package org.example.mailserver.model;
+package org.example.Applikasjonsutviklingarbeidskrav.model;
 
 
 import jakarta.persistence.*;
@@ -15,13 +15,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userid;
+    private Long userId;
 
     @Column (nullable=false, name= "first_name")
-    private String firstname;
+    private String firstName;
 
     @Column(nullable=false, name="last_name")
-    private String lastname;
+    private String lastName;
 
     @Column(nullable=false, name="email_address")
     private String email;
@@ -32,4 +32,8 @@ public class User {
     @Column(nullable=false, name="date_of_birth")
     private String dateOfBirth;
 
+    /*
+    @Column (nullable=false, name="timestamp")
+    private String timestamp;
+    */
 }

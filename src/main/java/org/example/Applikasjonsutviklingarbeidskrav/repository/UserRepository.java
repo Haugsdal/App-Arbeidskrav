@@ -1,12 +1,8 @@
-package org.example.mailserver.repository;
+package org.example.Applikasjonsutviklingarbeidskrav.repository;
 
-import jakarta.transaction.Transactional;
-import org.example.mailserver.model.User;
+import org.example.Applikasjonsutviklingarbeidskrav.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
+import java.util.Optional;
 
 
 /*
@@ -20,7 +16,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     //Find user by email
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     //Save new user
     User save(User user);
