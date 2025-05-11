@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.RegisterUserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.UserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.mapper.UserMapper;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -52,7 +54,8 @@ public class ApplikasjonsController {
     /*
     Create user
     Collect information from JSON body and insert it into a dto. Then, call service layer and pass
-    the dto to it. Respond with request has been completed.
+    the dto to it. Respond with request has been completed and the information about the user,
+    excluding the password and date of birth.
     */
 
     @PostMapping("/createUser")
@@ -61,9 +64,28 @@ public class ApplikasjonsController {
     @ApiResponses({
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
-    public ResponseEntity<UserDto> createUser (@Valid @RequestBody RegisterUserDto registerUserDto) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(applikasjonsService.createUser(registerUserDto));
+    public ResponseEntity<UserDto> createUser (@Valid @RequestBody RegisterUserDto registerUserDto,
+                                               UriComponentsBuilder uriBuilder) {
+        var createdUser=applikasjonsService.createUser(registerUserDto);
+        var uri=uriBuilder.path("/app/{email}").buildAndExpand(createdUser.getEmail()).toUri();
+
+        return ResponseEntity.created(uri).body(createdUser);
+    }
+
+    /*
+    Deleting User
+    - Should also delete all activities registered on that account
+
+    First, check if the user exists. Then,
+    */
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+        var user=userRepository.findByEmail(email).orElse(null);
+        if (user==null) {
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.delete(user);
+        return ResponseEntity.noContent().build();
     }
 
 }
