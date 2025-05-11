@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (nullable=false, name="user_id")
-    private Long userId;
+    private int userId;
 
     @Column (nullable=false, name= "first_name")
     private String firstName;
@@ -33,8 +33,4 @@ public class User {
     @Column(nullable=false, name="date_of_birth")
     private String dateOfBirth;
 
-    /*
-    @Column (nullable=false, name="timestamp")
-    private String timestamp;
-    */
 }

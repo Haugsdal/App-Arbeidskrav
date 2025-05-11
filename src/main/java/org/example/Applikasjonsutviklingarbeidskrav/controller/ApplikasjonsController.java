@@ -10,8 +10,9 @@ import org.example.Applikasjonsutviklingarbeidskrav.dto.RegisterUserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.UserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.mapper.UserMapper;
 import org.example.Applikasjonsutviklingarbeidskrav.repository.UserRepository;
-//import org.example.Applikasjonsutviklingarbeidskrav.service.ApplikasjonsService;
+import org.example.Applikasjonsutviklingarbeidskrav.service.ApplikasjonsService;
 import org.example.Applikasjonsutviklingarbeidskrav.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,11 @@ public class ApplikasjonsController {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    //private final ApplikasjonsService applikasjonsService;
+    @Autowired
+    private final ApplikasjonsService applikasjonsService;
 
     //Get user by email
-    @GetMapping("getEmail/{email}")
+    @GetMapping("/email/{email}")
     @Operation(summary="Get user by email", description="Get user by email address")
     public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {//pathvariable captures dynamic values from the request URL
 
@@ -47,33 +49,21 @@ public class ApplikasjonsController {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
-    //private final UserService userService;
-
-    //get all users
-    /*@GetMapping("/getUsers/")
-    @Operation(summary="get all users")
-    public List<UserDto> getAllUsers() {
-        return userService.getUsers();
-    }*/
-
-
-
     /*
     Create user
     Collect information from JSON body and insert it into a dto. Then, call service layer and pass
     the dto to it. Respond with request has been completed.
+    */
 
-    @PostMapping("createUser")
+    @PostMapping("/createUser")
     @Operation(summary="Post user", description="Create user")
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponses(
-            @ApiResponse(responseCode="500", description="Internal Server Error")
-    )
-    public ResponseEntity<RegisterUserDto> createUser (@Valid @RequestBody RegisterUserDto registerUserDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(applikasjonsService.createUser(registerUserDto));
+    @ApiResponses({
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    public ResponseEntity<UserDto> createUser (@Valid @RequestBody RegisterUserDto registerUserDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(applikasjonsService.createUser(registerUserDto));
     }
-
-
-     */
 
 }

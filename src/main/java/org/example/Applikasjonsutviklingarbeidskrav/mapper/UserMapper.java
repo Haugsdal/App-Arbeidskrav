@@ -9,6 +9,8 @@ import org.mapstruct.*;
 public interface UserMapper {
     UserDto toDto(User user);
 
-    //public static User toEntity(UserDto userDto) {}
+    //Method that returns a user object, and uses a registerUserDto object
+    User toUserObject(RegisterUserDto registerUserDto);
+
 
 }
