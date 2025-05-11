@@ -8,11 +8,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.RegisterUserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.UserDto;
+import org.example.Applikasjonsutviklingarbeidskrav.mapper.UserMapper;
 import org.example.Applikasjonsutviklingarbeidskrav.repository.UserRepository;
 //import org.example.Applikasjonsutviklingarbeidskrav.service.ApplikasjonsService;
+import org.example.Applikasjonsutviklingarbeidskrav.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController //Creates a bean that is managed by spring
 @RequestMapping("/app")
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApplikasjonsController {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     //private final ApplikasjonsService applikasjonsService;
 
     //Get user by email
@@ -38,12 +43,18 @@ public class ApplikasjonsController {
             return ResponseEntity.notFound().build();
         }
 
-        //To protect the information, we use a dto to limit the information displayed for the user
-        var userDto = new UserDto(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail());
-
         //Lastly, we return the information in the user dto.
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
+
+    //private final UserService userService;
+
+    //get all users
+    /*@GetMapping("/getUsers/")
+    @Operation(summary="get all users")
+    public List<UserDto> getAllUsers() {
+        return userService.getUsers();
+    }*/
 
 
 
