@@ -6,20 +6,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.RegisterUserDto;
 import org.example.Applikasjonsutviklingarbeidskrav.dto.UserDto;
-import org.example.Applikasjonsutviklingarbeidskrav.mapper.UserMapper;
-import org.example.Applikasjonsutviklingarbeidskrav.repository.UserRepository;
 import org.example.Applikasjonsutviklingarbeidskrav.service.ApplikasjonsService;
-import org.example.Applikasjonsutviklingarbeidskrav.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @RestController //Creates a bean that is managed by spring
 @RequestMapping("/app")
