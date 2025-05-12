@@ -76,7 +76,9 @@ public class ApplikasjonsController {
     Deleting User
     - Should also delete all activities registered on that account
 
-    First, check if the user exists. Then,
+    First, check if the user exists. Then, check if user has any registered activities in the
+    activities table. If they do, create a list of them and delete every object by iterating
+    through the list. Lastly, delete the user from the user table.
     */
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {

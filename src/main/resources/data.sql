@@ -25,3 +25,22 @@ INSERT INTO users ( user_id, first_name, last_name, email_address, password, dat
     ('4', 'bertimusprime','tester', 'albert@mail.com', '456','1999-12-12');
 
 SELECT * FROM users ORDER BY user_id;
+
+DROP TABLE IF EXISTS activity CASCADE;
+
+TRUNCATE TABLE activity;
+CREATE TABLE activity (
+                       activity_id INT PRIMARY KEY,
+                       description VARCHAR(255),
+                       duration INT,
+                       accessibility VARCHAR(10),
+                       published DATE,
+                       CONSTRAINT fk_activity FOREIGN KEY(publisher) REFERENCES users(email_address)
+);
+
+INSERT INTO activity (activity_id, description, duration, accessibility, published, publisher) VALUES
+    (21,'yolo',32,'true','2010-10-10','malin@mail.com'),
+    (22,'yolo',32,'true','2010-10-10','malin@mail.com'),
+    (23,'yolo',32,'true','2010-10-10','malin@mail.com');
+
+SELECT * FROM activity;

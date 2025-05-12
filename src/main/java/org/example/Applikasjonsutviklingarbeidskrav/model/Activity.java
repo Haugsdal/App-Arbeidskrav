@@ -15,7 +15,8 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long activityId;
+    @Column (nullable=false, name="activity_id")
+    private int activityId;
 
     @Column(nullable=false, name="description")
     private String description;
@@ -24,8 +25,12 @@ public class Activity {
     private int duration;
 
     @Column(nullable=false, name="accessibility")
-    private Boolean accessibility;
+    private String accessibility;
 
     @Column(nullable=false, name="published")
     private LocalDate published;
+
+    @ManyToOne(cascade=CascadeType.ALL) //Changes made to the user entity is done to their children as well
+    @JoinColumn(name="email_address")
+    private User user;
 }
