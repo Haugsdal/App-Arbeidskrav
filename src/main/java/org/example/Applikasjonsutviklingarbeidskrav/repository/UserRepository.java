@@ -27,6 +27,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //Save new user
     User save(User user);
 
-    //Delete user by email
-    void deleteByEmail(String email);
 }

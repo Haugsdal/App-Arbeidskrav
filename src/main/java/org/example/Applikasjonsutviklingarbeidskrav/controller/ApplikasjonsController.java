@@ -27,7 +27,7 @@ public class ApplikasjonsController {
     /*
     Get user by email
     */
-    @GetMapping("/email/{email}")
+    @GetMapping("/getUser/{email}")
     @Operation(summary="Get user by email", description="Get user by email address")
     public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
 
@@ -56,7 +56,7 @@ public class ApplikasjonsController {
     /*
     Delete user and all activities they have registered
      */
-    @DeleteMapping("/{email}")
+    @DeleteMapping("deleteUser/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {
 
         applikasjonsService.deleteUser(email);
