@@ -7,7 +7,7 @@ CREATE TABLE users (
                        last_name VARCHAR(50),
                        email_address VARCHAR(100),
                        password VARCHAR(100),
-                       date_of_birth DATE
+                       date_of_birth VARCHAR(100)
 
 );
 
@@ -30,17 +30,18 @@ DROP TABLE IF EXISTS activity CASCADE;
 
 TRUNCATE TABLE activity;
 CREATE TABLE activity (
-                       activity_id INT PRIMARY KEY,
-                       description VARCHAR(255),
-                       duration INT,
-                       accessibility VARCHAR(10),
-                       published DATE,
-                       CONSTRAINT fk_activity FOREIGN KEY(publisher) REFERENCES users(email_address)
+                          activity_id INT PRIMARY KEY,
+                          description VARCHAR(255),
+                          duration INT,
+                          accessibility VARCHAR(10),
+                          published DATE,
+                          publisher INT,
+                          CONSTRAINT fk_activity FOREIGN KEY(publisher) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 INSERT INTO activity (activity_id, description, duration, accessibility, published, publisher) VALUES
-    (21,'yolo',32,'true','2010-10-10','malin@mail.com'),
-    (22,'yolo',32,'true','2010-10-10','malin@mail.com'),
-    (23,'yolo',32,'true','2010-10-10','malin@mail.com');
+    (21,'yolo',32,'true','2010-10-10',1),
+    (22,'yolo',32,'true','2010-10-10',2),
+    (23,'yolo',32,'true','2010-10-10',3);
 
 SELECT * FROM activity;

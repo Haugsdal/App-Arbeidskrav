@@ -30,7 +30,7 @@ public class Activity {
     @Column(nullable=false, name="published")
     private LocalDate published;
 
-    @ManyToOne(cascade=CascadeType.ALL) //Changes made to the user entity is done to their children as well
-    @JoinColumn(name="email_address")
+    @ManyToOne
+    @JoinColumn(name="publisher")
     private User user;
 }

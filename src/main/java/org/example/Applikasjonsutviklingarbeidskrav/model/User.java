@@ -4,8 +4,7 @@ package org.example.Applikasjonsutviklingarbeidskrav.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 
 @Entity
@@ -34,13 +33,6 @@ public class User {
     private String password;
 
     @Column(nullable=false, name="date_of_birth")
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
-    @OneToMany(mappedBy="user", cascade={
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.DETACH,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    private List<Activity> activities;
 }
